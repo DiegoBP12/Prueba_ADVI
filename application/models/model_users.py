@@ -31,12 +31,13 @@ def delete_users(user):
         return None
 
 
-def insert_users(nombre,carrera,grado,tipo):
+def insert_users(user,nombre,carrera,grado,tipo):
     try:
-        return db.insert('users',nombre=nombre,
-carrera=carrera,
-grado=grado,
-tipo=tipo)
+        return db.insert('users',user=user,
+        nombre=nombre,
+        carrera=carrera,
+        grado=grado,
+        tipo=tipo)
     except Exception as e:
         print "Model insert Error {}".format(e.args)
         print "Model insert Message {}".format(e.message)
