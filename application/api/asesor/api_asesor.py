@@ -119,8 +119,8 @@ class Api_asesor:
                     raise web.seeother('/404')
                 elif action == 'get':
                     return self.get(id_as)
-                elif action == 'get_correo':
-                    return self.get_correo(correo)
+                elif action == 'get_asesor':
+                    return self.get_asesor(correo)
                 elif action == 'put':
                     return self.put(correo,horario,habilidades,grado,validado)
                 elif action == 'delete':
