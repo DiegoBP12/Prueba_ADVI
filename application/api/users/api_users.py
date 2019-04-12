@@ -29,6 +29,7 @@ class Api_users:
             return json.dumps(users_json)
 
 # http://0.0.0.0:8080/api_users?user_hash=12345&action=put&user=1&product=nuevo&description=nueva&stock=10&purchase_price=1&price_sale=3&product_image=0
+
     def put(self,user,nombre,carrera,grado,tipo):
         try:
             config.model.insert_users(user,nombre,carrera,grado,tipo)

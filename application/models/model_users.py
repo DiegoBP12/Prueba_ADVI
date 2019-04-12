@@ -31,6 +31,7 @@ def delete_users(user):
         return None
 
 
+<<<<<<< HEAD
 def insert_users(user,nombre,carrera,grado,tipo):
     try:
         return db.insert('users',user=user,
@@ -38,6 +39,15 @@ def insert_users(user,nombre,carrera,grado,tipo):
         carrera=carrera,
         grado=grado,
         tipo=tipo)
+=======
+def insert_users(nombre,carrera,grado,tipo,user):
+    try:
+        return db.insert('users',nombre=nombre,
+carrera=carrera,
+grado=grado,
+tipo=tipo,
+user=user)
+>>>>>>> 10c5c9ad10bf7ca73e869da4b68e0dffd7b9e9b2
     except Exception as e:
         print "Model insert Error {}".format(e.args)
         print "Model insert Message {}".format(e.message)
