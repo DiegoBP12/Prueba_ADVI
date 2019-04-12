@@ -28,7 +28,7 @@ class Api_asesor:
             web.header('Content-Type', 'application/json')
             return json.dumps(asesor_json)
     
-    def get_correo(self, correo):
+    def get_asesor(self, correo):
         try:
             # http://0.0.0.0:8080/api_asesor?user_hash=12345&action=get
             if correo is None:
@@ -40,7 +40,7 @@ class Api_asesor:
                 web.header('Content-Type', 'application/json')
                 return json.dumps(asesor_json)
             else:
-                # http://0.0.0.0:8080/api_asesor?user_hash=12345&action=get&id_as=1
+                # http://0.0.0.0:8080/api_asesor?user_hash=12345&action=get_asesor&correo=dieloxes@gmail.com
                 result = config.model.get_asesor(correo)
                 asesor_json = []
                 asesor_json.append(dict(result))

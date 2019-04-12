@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import web
 import config as config
 

@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import config as config # importa el archivo config
 
 db = config.db # crea un objeto del objeto db creado en config 
