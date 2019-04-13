@@ -27,35 +27,11 @@ class Api_asesor:
             asesor_json = '[]'
             web.header('Content-Type', 'application/json')
             return json.dumps(asesor_json)
-    
-    def get_asesor(self, correo):
-        try:
-            # http://0.0.0.0:8080/api_asesor?user_hash=12345&action=get
-            if correo is None:
-                result = config.model.get_all_asesor()
-                asesor_json = []
-                for row in result:
-                    tmp = dict(row)
-                    asesor_json.append(tmp)
-                web.header('Content-Type', 'application/json')
-                return json.dumps(asesor_json)
-            else:
-                # http://0.0.0.0:8080/api_asesor?user_hash=12345&action=get_asesor&correo=dieloxes@gmail.com
-                result = config.model.get_asesor(correo)
-                asesor_json = []
-                asesor_json.append(dict(result))
-                web.header('Content-Type', 'application/json')
-                return json.dumps(asesor_json)
-        except Exception as e:
-            print "GET Error {}".format(e.args)
-            asesor_json = '[]'
-            web.header('Content-Type', 'application/json')
-            return json.dumps(asesor_json)
 
 # http://0.0.0.0:8080/api_asesor?user_hash=12345&action=put&id_as=1&product=nuevo&description=nueva&stock=10&purchase_price=1&price_sale=3&product_image=0
-    def put(self, correo,horario,habilidades,validado):
+    def put(self, correo,nombre,carrera,horario,habilidades,grado,validado):
         try:
-            config.model.insert_asesor(correo,horario,habilidades,validado)
+            config.model.insert_asesor(correo,nombre,carrera,horario,habilidades,grado,validado)
             asesor_json = '[{200}]'
             web.header('Content-Type', 'application/json')
             return json.dumps(asesor_json)
@@ -75,9 +51,9 @@ class Api_asesor:
             return None
 
 # http://0.0.0.0:8080/api_asesor?user_hash=12345&action=update&id_as=1&product=nuevo&description=nueva&stock=10&purchase_price=1&price_sale=3&product_image=default.jpg
-    def update(self, id_as, correo,horario,habilidades,validado):
+    def update(self, id_as, correo,nombre,carrera,horario,habilidades,grado,validado):
         try:
-            config.model.edit_asesor(id_as,correo,horario,habilidades,validado)
+            config.model.edit_asesor(id_as,correo,nombre,carrera,horario,habilidades,grado,validado)
             asesor_json = '[{200}]'
             web.header('Content-Type', 'application/json')
             return json.dumps(asesor_json)
@@ -93,6 +69,8 @@ class Api_asesor:
             action=None,
             id_as=None,
             correo=None,
+            nombre=None,
+            carrera=None,
             horario=None,
             habilidades=None,
             grado=None,
@@ -104,6 +82,10 @@ class Api_asesor:
             id_as=user_data.id_as
 
             correo=user_data.correo
+
+            nombre=user_data.nombre
+
+            carrera=user_data.carrera
 
             horario=user_data.horario
 
@@ -119,14 +101,12 @@ class Api_asesor:
                     raise web.seeother('/404')
                 elif action == 'get':
                     return self.get(id_as)
-                elif action == 'get_asesor':
-                    return self.get_asesor(correo)
                 elif action == 'put':
-                    return self.put(correo,horario,habilidades,grado,validado)
+                    return self.put(correo,nombre,carrera,horario,habilidades,grado,validado)
                 elif action == 'delete':
                     return self.delete(id_as)
                 elif action == 'update':
-                    return self.update(id_as, correo,horario,habilidades,grado,validado)
+                    return self.update(id_as, correo,nombre,carrera,horario,habilidades,grado,validado)
             else:
                 raise web.seeother('/404')
         except Exception as e:
