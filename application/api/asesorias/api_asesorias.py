@@ -83,6 +83,38 @@ class Api_asesorias:
             web.header('Content-Type', 'application/json')
             return json.dumps(asesorias_json)
 
+    def get_asesor_estado(self, asesor,estado):
+        try:
+            # http://0.0.0.0:8080/api_asesorias?user_hash=12345&action=get_asesor_estado&asesor=dieloxes@gmail.com&estado=aceptado
+            result = config.model.get_asesor_estado(asesor,estado)
+            asesorias_json = []
+            for row in result:
+                tmp = dict(row)
+                asesorias_json.append(tmp)
+            web.header('Content-Type', 'application/json')
+            return json.dumps(asesorias_json, sort_keys=True, default=str)
+        except Exception as e:
+            print "GET Error {}".format(e.args)
+            asesorias_json = '[]'
+            web.header('Content-Type', 'application/json')
+            return json.dumps(asesorias_json)
+
+    def get_solicitante_estado(self, get_solicitante,estado):
+        try:
+            # http://0.0.0.0:8080/api_asesorias?user_hash=12345&action=get_asesor_estado&asesor=dieloxes@gmail.com&estado=aceptado
+            result = config.model.get_asesor_estado(solicitante,estado)
+            asesorias_json = []
+            for row in result:
+                tmp = dict(row)
+                asesorias_json.append(tmp)
+            web.header('Content-Type', 'application/json')
+            return json.dumps(asesorias_json, sort_keys=True, default=str)
+        except Exception as e:
+            print "GET Error {}".format(e.args)
+            asesorias_json = '[]'
+            web.header('Content-Type', 'application/json')
+            return json.dumps(asesorias_json)
+
 # http://0.0.0.0:8080/api_asesorias?user_hash=12345&action=put&num_as=1&product=nuevo&description=nueva&stock=10&purchase_price=1&price_sale=3&product_image=0
     def put(self, dia,hora,estado,solicitante,asesor,tema):
         try:
@@ -155,6 +187,8 @@ class Api_asesorias:
                     return self.get(num_as)
                 elif action == 'get_asesor':
                     return self.get_asesor(asesor)
+                elif action == 'get_asesor_estado':
+                    return self.get_asesor_estado(asesor,estado)
                 elif action == 'get_solicitante':
                     return self.get_solicitante(solicitante)
                 elif action == 'put':
