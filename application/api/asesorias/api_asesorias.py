@@ -99,10 +99,10 @@ class Api_asesorias:
             web.header('Content-Type', 'application/json')
             return json.dumps(asesorias_json)
 
-    def get_solicitante_estado(self, get_solicitante,estado):
+    def get_solicitante_estado(self, solicitante,estado):
         try:
             # http://0.0.0.0:8080/api_asesorias?user_hash=12345&action=get_asesor_estado&asesor=dieloxes@gmail.com&estado=aceptado
-            result = config.model.get_asesor_estado(solicitante,estado)
+            result = config.model.get_solicitante_estado(solicitante,estado)
             asesorias_json = []
             for row in result:
                 tmp = dict(row)
@@ -191,6 +191,8 @@ class Api_asesorias:
                     return self.get_asesor_estado(asesor,estado)
                 elif action == 'get_solicitante':
                     return self.get_solicitante(solicitante)
+                elif action == 'get_solicitante_estado':
+                    return self.get_solicitante_estado(solicitante,estado)
                 elif action == 'put':
                     return self.put(dia,hora,estado,solicitante,asesor,tema)
                 elif action == 'delete':

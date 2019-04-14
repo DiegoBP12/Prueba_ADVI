@@ -37,9 +37,9 @@ def get_asesor_estado(asesor,estado):
             print "Model get Message {}".format(e.message)
             return None
 
-def get_solicitante_estado(asesor,estado):
+def get_solicitante_estado(solicitante,estado):
         try:
-            return db.select('asesorias', where='asesor = $asesor'and 'estado = $estado',vars=locals() )
+            return db.select('asesorias', where='solicitante = $solicitante'and 'estado = $estado',vars=locals() )
         except Exception as e:
             print "Model get Error {}".format(e.args)
             print "Model get Message {}".format(e.message)
