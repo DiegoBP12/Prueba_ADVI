@@ -1,5 +1,5 @@
 import web
-import config
+import config as config
 
 db = config.db
 
@@ -13,9 +13,9 @@ def get_all_valoracion():
         return None
 
 
-def get_valoracion(num_val):
+def get_valoracion(asesoria):
     try:
-        return db.select('valoracion', where='num_val=$num_val', vars=locals())[0]
+        return db.select('valoracion', where='asesoria=$asesoria', vars=locals())
     except Exception as e:
         print "Model get Error {}".format(e.args)
         print "Model get Message {}".format(e.message)
